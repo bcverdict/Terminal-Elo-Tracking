@@ -1,0 +1,27 @@
+.toCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.input {
+    width: 20% !important;
+    text-align: center;
+    margin: 5px !important;
+}
+.button {
+    width: 20% !important;
+    margin: 5px !important;
+}
+.full {
+    width: 100% !important;
+    height: 100% !important;
+}
+.darkModeContainer {
+    width: 100% !important;
+    display: flex;
+    justify-content: flex-end;
+    margin: 5px !important;
+    padding-right: 5px;
+}
