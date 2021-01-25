@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/Terminal-Elo-Tracking/static/css/main.09dfbde4.chunk.css",
+    "main.js": "/Terminal-Elo-Tracking/static/js/main.395b0265.chunk.js",
+    "main.js.map": "/Terminal-Elo-Tracking/static/js/main.395b0265.chunk.js.map",
+    "runtime-main.js": "/Terminal-Elo-Tracking/static/js/runtime-main.b7458f3d.js",
+    "runtime-main.js.map": "/Terminal-Elo-Tracking/static/js/runtime-main.b7458f3d.js.map",
+    "static/css/2.150d169a.chunk.css": "/Terminal-Elo-Tracking/static/css/2.150d169a.chunk.css",
+    "static/js/2.917b3acd.chunk.js": "/Terminal-Elo-Tracking/static/js/2.917b3acd.chunk.js",
+    "static/js/2.917b3acd.chunk.js.map": "/Terminal-Elo-Tracking/static/js/2.917b3acd.chunk.js.map",
+    "static/js/3.d43584c5.chunk.js": "/Terminal-Elo-Tracking/static/js/3.d43584c5.chunk.js",
+    "static/js/3.d43584c5.chunk.js.map": "/Terminal-Elo-Tracking/static/js/3.d43584c5.chunk.js.map",
+    "index.html": "/Terminal-Elo-Tracking/index.html",
+    "static/css/2.150d169a.chunk.css.map": "/Terminal-Elo-Tracking/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.09dfbde4.chunk.css.map": "/Terminal-Elo-Tracking/static/css/main.09dfbde4.chunk.css.map",
+    "static/js/2.917b3acd.chunk.js.LICENSE.txt": "/Terminal-Elo-Tracking/static/js/2.917b3acd.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b7458f3d.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.917b3acd.chunk.js",
+    "static/css/main.09dfbde4.chunk.css",
+    "static/js/main.395b0265.chunk.js"
+  ]
+}
