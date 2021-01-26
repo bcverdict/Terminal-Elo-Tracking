@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Terminal-Elo-Tracking/static/css/main.2c065c72.chunk.css",
-    "main.js": "/Terminal-Elo-Tracking/static/js/main.98d78857.chunk.js",
-    "main.js.map": "/Terminal-Elo-Tracking/static/js/main.98d78857.chunk.js.map",
+    "main.js": "/Terminal-Elo-Tracking/static/js/main.60aa367a.chunk.js",
+    "main.js.map": "/Terminal-Elo-Tracking/static/js/main.60aa367a.chunk.js.map",
     "runtime-main.js": "/Terminal-Elo-Tracking/static/js/runtime-main.33c54822.js",
     "runtime-main.js.map": "/Terminal-Elo-Tracking/static/js/runtime-main.33c54822.js.map",
     "static/css/2.150d169a.chunk.css": "/Terminal-Elo-Tracking/static/css/2.150d169a.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.c1402965.chunk.js",
     "static/css/main.2c065c72.chunk.css",
-    "static/js/main.98d78857.chunk.js"
+    "static/js/main.60aa367a.chunk.js"
   ]
 }
