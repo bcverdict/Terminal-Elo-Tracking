@@ -219,7 +219,8 @@ export default function Body() {
                 <Input className="input" onChange={(obj)=>onInputChange(obj.target.value)}/>
                 <Button className="button" color="primary" onClick={find}>Find</Button>
                 {showError && <h2>no algo with this id found</h2>}
-                { Object.keys(lineData).length != 0 && creatorName != "" && playerAlgoName != "" && Object.keys(rivalData).length != 0 && rival != "" && rival in rivalData &&
+                {showError && <h2>(could have been deleted)</h2>}
+                {!showError && Object.keys(lineData).length != 0 && creatorName != "" && playerAlgoName != "" && Object.keys(rivalData).length != 0 && rival != "" && rival in rivalData &&
                 <div style={toCenter}>
                     <Chart data={lineData} creator={creatorName} algoName={playerAlgoName}/>
                     <MyTable data={rivalData} rival={rival} changeId={changeId} wins={wins} losses={losses}></MyTable>
