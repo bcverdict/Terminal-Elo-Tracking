@@ -14,6 +14,13 @@ export default function MyTable(props) {
         color: darkMode ? "#c9d1d9" : "black",
         backgroundColor: darkMode ? "#0d1117" : "white",
     }
+    const tableRowStyle = {
+        display: "flex",
+        justifyContent: "center",
+        width: "20%",
+        color: darkMode ? "#c9d1d9" : "black",
+        backgroundColor: darkMode ? "#0d1117" : "white",
+    }
     //console.log("gameData: "+JSON.stringify(gameData))
     //console.log("rival: "+rival)
     return (
@@ -66,11 +73,11 @@ export default function MyTable(props) {
                         gameData[key]["Results"].map((result, index)=> {
                             return(
                                 <tr className="full">
-                                    <td className="data"><button type="button" className="link-button" onClick={() => props.changeId(gameData[key]["AlgoId"][index])}><h5>{gameData[key]["AlgoName"][index]}</h5></button></td>
-                                    <td className="data"><h5>{gameData[key]["Results"][index]}</h5></td>
-                                    <td className="data"><h5>{gameData[key]["Turns"][index]}</h5></td>
-                                    <td className="data"><h5>{gameData[key]["Elo"][index]}</h5></td>
-                                    <td className="data"><a href={gameData[key]["Game"][index]}><h5>watch</h5></a></td>
+                                    <td style={tableRowStyle}><button type="button" className="link-button" onClick={() => props.changeId(gameData[key]["AlgoId"][index])}><h5>{gameData[key]["AlgoName"][index]}</h5></button></td>
+                                    <td style={tableRowStyle}><h5>{gameData[key]["Results"][index]}</h5></td>
+                                    <td style={tableRowStyle}><h5>{gameData[key]["Turns"][index]}</h5></td>
+                                    <td style={tableRowStyle}><h5>{gameData[key]["Elo"][index]}</h5></td>
+                                    <td style={tableRowStyle}><a href={gameData[key]["Game"][index]}><h5>watch</h5></a></td>
                                 </tr>
                             )
                         })

@@ -4,7 +4,7 @@ import ThemeProvider from './ThemeContext';
 export default function App() {
   return (
     <div className="App">
-      <ThemeProvider style={{height: "100%"}}>
+      <ThemeProvider>
         <Body style={{height: "100%"}}>
           </Body>
       </ThemeProvider>
