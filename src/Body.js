@@ -50,7 +50,7 @@ export default function Body() {
         const fetched = await fetch("https://terminal.c1games.com/api/game/algo/"+algoId+"/matches")
         setShowError(fetched.status != 200)
         const response = await fetched.json().then(response => {
-            console.log("response: "+JSON.stringify(response))
+            //console.log("response: "+JSON.stringify(response))
             const matches = response.data.matches
 
             /*
@@ -78,7 +78,7 @@ export default function Body() {
             var magnitudeChange = 0.9
             var matchLength = matches.length
             var slope = (rating-startElo)/matchLength
-            console.log("slope: "+slope)
+            //console.log("slope: "+slope)
             var temp = startElo
             var opponent
             var result
@@ -112,10 +112,11 @@ export default function Body() {
                     algoName = match.losing_algo.name
                     opponentAlgoId = match.losing_algo.id
 
-                    console.log("temp before: "+temp)
+                    //console.log("temp before: "+temp)
                     var tempRating = slope*index+startElo
                     temp = tempRating+32*(1-Ea)
-                    console.log("temp after: "+temp)
+                    //temp = dataArray[index]+15
+                    //console.log("temp after: "+temp)
 
                 }else{
                     loseCount += 1
@@ -130,19 +131,19 @@ export default function Body() {
                     algoName = match.winning_algo.name
                     opponentAlgoId = match.winning_algo.id
                     
-                    console.log("temp before: "+temp)
-                    var tempRating = slope*index+startElo
+                    //console.log("temp before: "+temp)
                     var tempRating = slope*index+startElo
                     temp = tempRating+32*(0-Ea)
-                    console.log("temp after: "+temp)
+                    //temp = dataArray[index]-15
+                    //console.log("temp after: "+temp)
                 }
                 /*
                 console.log("m: "+slope)
                 console.log("x: "+(matchLength-index))
                 console.log("b: "+startElo)
                 */
-                console.log("original: "+(Math.round(slope*Math.abs(matchLength-index))+startElo))
-                console.log("new: "+temp)
+                //console.log("original: "+(Math.round(slope*Math.abs(matchLength-index))+startElo))
+                //console.log("new: "+temp)
                 dataArray.push(Math.round(temp))
                 labelArray.push(algoName)
                 if(opponent in tableDataObj){
