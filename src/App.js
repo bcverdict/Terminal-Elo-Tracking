@@ -1,6 +1,6 @@
-import './App.css';
-import Body from './Body';
-import ThemeProvider from './ThemeContext';
+import './styles/App.css';
+import Body from './views/Body';
+import ThemeProvider from './views/ThemeContext';
 export default function App() {
   return (
     <div className="App">

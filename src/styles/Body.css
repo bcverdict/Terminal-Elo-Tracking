@@ -5,8 +5,12 @@
     width: 100%;
     height: 100%;
 }
+.inputButtonPair {
+    display: flex;
+    justify-content: center;
+}
 .input {
-    width: 20% !important;
+    width: 80% !important;
     text-align: center;
     margin: 5px !important;
 }

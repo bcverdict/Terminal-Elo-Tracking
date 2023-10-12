@@ -45,3 +45,13 @@ text-decoration: underline;
   flex-direction: row;
   justify-content: space-around;
 }
+.pageButton {
+  width: 20%;
+  background-color: blue;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 12px 0;
+}

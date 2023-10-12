@@ -1,10 +1,8 @@
 import React, {useContext} from 'react'
 import {Line} from 'react-chartjs-2';
-import {Button} from 'reactstrap'
-import './Chart.css'
+import '../styles/Chart.css'
 import {ThemeContext} from "./ThemeContext";
 export default function Chart(props) {
-    //console.log("algo name: "+props.algoName)
     const {darkMode} = useContext(ThemeContext);
     const chartStyle = {
       display: "flex",
@@ -32,13 +30,6 @@ export default function Chart(props) {
                 }
               }}
             />
-            {/*
-            <div className="ButtonGroup">
-              <Button>All time</Button>
-              <Button>1 Month</Button>
-              <Button>5 Months</Button>
-            </div>
-            */}
         </div>
     )
 }
