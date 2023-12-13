@@ -4,31 +4,21 @@ import '../styles/Body.css';
 import MyTable from './MyTable';
 import {ThemeContext} from "./ThemeContext";
 import TerminalApiWrapper from "../wrappers/TerminalApiWrapper";
-import TableModel from "../models/TableModel";
-import BuildTableModelController from "../controllers/BuildTableModelController";
 import TableController from "../controllers/TableController";
 import SearchIcon from '@mui/icons-material/Search';
 import CircularProgress from "@mui/material/CircularProgress";
 import RivalTableController from "../controllers/RivalTableController";
 import DarkModeButton from "./DarkModeButton";
 import EloChart from "./EloChart";
-import Pagination from "./Pagination";
-import tableController from "../controllers/TableController";
+import DataAccessorWrapper from "../wrappers/DataAccessorWrapper";
 
 
 export default function Body() {
     const api_wrapper = new TerminalApiWrapper()
     const {darkMode, setDarkMode} = useContext(ThemeContext)
 
-    const [tableModel, setTableModel] = useState(new TableModel())
-    const [displayTableModel, setDisplayTableModel] = useState(new TableModel())
-    const [tableModelPageNum, setTableModelPageNum] = useState(0)
-
-    const [rivalTableModel, setRivalTableData] = useState(new TableModel())
-    const [displayRivalTableModel, setDisplayRivalTableModel] = useState(new TableModel())
-    const [rivalTablePageNum, setRivalTablePageNum] = useState(0)
-
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [matchData, setMatchData] = useState([])
+    const [rivalData, setRivalData] = useState([])
 
     const [rivalName, setRivalName] = useState("")
     const [algoId, setAlgoId] = useState(0)
@@ -41,31 +31,32 @@ export default function Body() {
     }, [algoId]);
     const refreshData = async () => {
         setIsLoading(true)
-        let model = await createTableModel()
-        setTableModel(model)
+        let matchData = await createMatchData()
+        setMatchData(matchData)
+
+        let rivalData = createRivalData(matchData)
+        setRivalData(rivalData)
+
         setIsLoading(false)
     }
-    const createTableModel = async () => {
-        console.log("algoId: ", algoId)
+    const createMatchData = async () => {
         let data = await api_wrapper.GetDataOnAlgorithm(algoId)
-        console.log("data: ", data)
-        return BuildTableModelController.CreateTableModel(algoId, data.data.matches)
+        return data
+    }
+    const createRivalData = (matchData) => {
+        if(DataAccessorWrapper.DataIsValid(matchData) && RivalTableController.hasRival(matchData, algoId)){
+            let rivalDetails = RivalTableController.findRival(matchData, algoId)
+            let rivalTableData = TableController.FilterByOpponentUserName(matchData, rivalDetails[0])
+
+            setRivalName(rivalDetails[0])
+            return rivalTableData
+        }
+        return [];
     }
 
     function changeId(id){
         setAlgoId(id)
     }
-
-    useEffect(() => {
-        if(RivalTableController.hasRival(tableModel)){
-            let rivalDetails = RivalTableController.findRival(tableModel)
-            let rivalTableData = TableController.FilterByName(tableModel, rivalDetails[0])
-
-            setRivalName(rivalDetails[0])
-            setRivalTableData(rivalTableData)
-        }
-
-    }, [tableModel])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -73,20 +64,6 @@ export default function Body() {
         setAlgoId(inputValue)
     }
 
-
-    useEffect(() => {
-        console.log("updating display data")
-        setDisplayTableModel(tableController.FilterByPageNum(tableModel.GetData(), tableModelPageNum, rowsPerPage))
-    }, [tableModelPageNum, rowsPerPage, tableModel]);
-    const setTableModelPageNumCallback = (data) => {
-        setTableModelPageNum(data)
-    }
-    const setRowsPerPageCallback = (data) => {
-        setRowsPerPage(data)
-    }
-    const SetDisplayTableModelCallback = (data) => {
-        setDisplayTableModel(data)
-    }
 
     const bodyStyle = {
         color: darkMode ? "#c9d1d9" : "black",
@@ -109,23 +86,29 @@ export default function Body() {
                     <Input className="input" value={inputValue === 0 ? '' : inputValue } onChange={(e)=>{setInputValue(e.target.value)}}/>
                     <Button className="button" color="primary" type="submit"><SearchIcon/></Button>
                 </form>
-                {tableModel.HasNoData() ? "" :
+                { DataAccessorWrapper.DataIsInvalid(matchData) ? "" :
                     isLoading ? <CircularProgress />:
-                <div style={toCenter}>
-                    <EloChart tableModel={tableModel} darkMode={darkMode}/>
-                    {!RivalTableController.hasRival(tableModel) ? "" :
-                        <MyTable title={"Rival: " + rivalName} data={displayRivalTableModel} style={toCenter} changeId={changeId} totalGames={rivalTableModel.GetData().length}/>
-                    }
-                    <MyTable title={"All Games"} data={displayTableModel} style={toCenter} changeId={changeId} totalGames={tableModel.GetData().length}/>
-                    <Pagination
-                        tableModel={tableModel}
-                        tableModelPageNum={tableModelPageNum}
-                        setDisplayTableModel={SetDisplayTableModelCallback}
-                        setTableModelPageNum={setTableModelPageNumCallback}
-                        setRowsPerPage={setRowsPerPageCallback}
-                        rowsPerPage={rowsPerPage}
-                    />
-                </div>
+                        <div style={toCenter}>
+                            <EloChart data={matchData} darkMode={darkMode} algoId={algoId}/>
+                            {!RivalTableController.hasRival(matchData, algoId) ? "" :
+                                <MyTable
+                                    title = {"Rival: " + rivalName}
+                                    fullData = {rivalData}
+                                    style = {toCenter}
+                                    changeId = {changeId}
+                                    totalGames = {rivalData.length}
+                                    algoId = {algoId}
+                                />
+                            }
+                            <MyTable
+                                title={"All Games"}
+                                fullData = {matchData}
+                                style = {toCenter}
+                                changeId = {changeId}
+                                totalGames = {matchData.length}
+                                algoId = {algoId}
+                            />
+                        </div>
                 }
             </div>
         </div>

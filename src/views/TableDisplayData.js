@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import {ThemeContext} from "./ThemeContext";
+import DataAccessorWrapper from "../wrappers/DataAccessorWrapper";
 
 export default function TableDisplayData(props) {
 
@@ -29,37 +30,34 @@ export default function TableDisplayData(props) {
         changeId(id)
     }
 
-    const row = (rowTableModel, index, changeId) => {
+    const row = (matchData, index, changeId, algoId) => {
         return (
             <tr className="full" key={index}>
                 <td style={rowItemStyle}>
-                    <button type="button" className="link-button" onClick={() => setIdAndRefreshData(rowTableModel.id(), changeId)}>
-                        <h5>{rowTableModel.name()}</h5>
+                    <button type="button" className="link-button" onClick={() => setIdAndRefreshData(DataAccessorWrapper.OpponentAlgoIdFromMatch(matchData, algoId), changeId)}>
+                        <h5>{DataAccessorWrapper.OpponentAlgoNameFromMatch(matchData, algoId)}</h5>
                     </button>
                 </td>
-                <td style={rowItemStyle}><h5>{rowTableModel.result()}</h5></td>
-                <td style={rowItemStyle}><h5>{rowTableModel.turns()}</h5></td>
-                <td style={rowItemStyle}><h5>{rowTableModel.elo()}</h5></td>
-                <td style={rowItemStyle}><a href={rowTableModel.link()}><h5>watch</h5></a></td>
+                <td style={rowItemStyle}><h5>{DataAccessorWrapper.MatchResult(matchData, algoId)}</h5></td>
+                <td style={rowItemStyle}><h5>{DataAccessorWrapper.MatchTurns(matchData)}</h5></td>
+                <td style={rowItemStyle}><h5>{DataAccessorWrapper.OpponentAlgoRatingFromMatch(matchData, algoId)}</h5></td>
+                <td style={rowItemStyle}><a href={DataAccessorWrapper.GameLinkFromMatchData(matchData)} target="_blank"><h5>watch</h5></a></td>
             </tr>
         );
     };
 
-    if(typeof props.tableData.data == "undefined"){
-        return '';
-    }
-
-    console.log("data before: ", props.tableData.data)
-    return (<table className="toCenter">
-        <thead className="full">
-        {labels()}
-        </thead>
-        <tbody className="toCenter">
-        {
-            props.tableData.data.map((rowTableModel, index) => {
-                return row(rowTableModel, index, props.changeId)
-            })
-        }
-        </tbody>
-    </table>);
+    return (
+        <table className="toCenter">
+            <thead className="full">
+            {labels()}
+            </thead>
+            <tbody className="toCenter">
+            {
+                props.data.map((element, index) => {
+                    return row(element, index, props.changeId, props.algoId)
+                })
+            }
+            </tbody>
+        </table>
+    );
 }

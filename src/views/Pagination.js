@@ -1,6 +1,6 @@
-import React, {useEffect} from "react";
-import tableController from "../controllers/TableController";
+import React from "react";
 import TablePagination from "@mui/material/TablePagination";
+import DataAccessorWrapper from "../wrappers/DataAccessorWrapper";
 
 export default function Pagination(props) {
     const PreviousFullTablePage = () => {
@@ -18,11 +18,11 @@ export default function Pagination(props) {
         return props.tableModelPageNum > 0
     }
     const canIncrementFullPageNum = () => {
-        return props.tableModelPageNum < props.tableModel.GetPageNumLimit(props.rowsPerPage)
+        return props.tableModelPageNum < DataAccessorWrapper.GetPageNumLimit(props.data, props.rowsPerPage)
     }
 
     const fullTableHasMultiplePages = () => {
-        return props.tableModel.GetPageNumLimit(props.rowsPerPage) > 0
+        return DataAccessorWrapper.GetPageNumLimit(props.data, props.rowsPerPage) > 0
     }
 
     const handleChangePage = (event, newPageNum) => {
@@ -38,7 +38,7 @@ export default function Pagination(props) {
         !fullTableHasMultiplePages() ? "" :
             <TablePagination
                 component="div"
-                count={props.tableModel.GetData().length}
+                count={props.data.length}
                 page={props.tableModelPageNum}
                 onPageChange={handleChangePage}
                 rowsPerPage={props.rowsPerPage}

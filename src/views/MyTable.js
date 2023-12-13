@@ -1,15 +1,33 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import '../styles/MyTable.css'
 
 import TableDisplayData from "./TableDisplayData";
+import Pagination from "./Pagination";
+import tableController from "../controllers/TableController";
 
 export default function MyTable(props) {
+
+    const [displayData, setDisplayData] = useState([]);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [pageNum, setPageNum] = useState(0)
+
+    useEffect(() => {
+        setDisplayData(tableController.FilterByPageNum(props.fullData, pageNum, rowsPerPage))
+    }, [pageNum, rowsPerPage, props.fullData]);
 
     return (
         <div style={props.style}>
             <h1 className='title'>{props.title}</h1>
             <h3>{"Total: " + props.totalGames}</h3>
-            <TableDisplayData tableData={props.data} changeId={props.changeId}/>
+            <TableDisplayData data={displayData} changeId={props.changeId} algoId={props.algoId}/>
+            <Pagination
+                data={props.fullData}
+                tableModelPageNum={pageNum}
+                setDisplayTableModel={setDisplayData}
+                setTableModelPageNum={setPageNum}
+                setRowsPerPage={setRowsPerPage}
+                rowsPerPage={rowsPerPage}
+            />
         </div>
     );
 }

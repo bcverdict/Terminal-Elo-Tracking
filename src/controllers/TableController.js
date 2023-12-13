@@ -1,4 +1,4 @@
-import TableModel from "../models/TableModel";
+import DataAccessorWrapper from "../wrappers/DataAccessorWrapper";
 
 class TableController {
 
@@ -9,20 +9,18 @@ class TableController {
         return (pageNum+1)*numOfRows
     }
 
-    static FilterByName(tableModel, name) {
-        return new TableModel(tableModel.GetData().filter((element) => {
-            if(element.opponentName === name){
-                return element
-            }
-        }))
+    static FilterByOpponentUserName(data, name) {
+        return data.filter((element) => {
+            return DataAccessorWrapper.OpponentUserNameFromMatch(element) === name
+        });
     }
 
     static FilterByPageNum(tableData, pageNum, numOfRows) {
-        return new TableModel(tableData.filter((element, index) => {
+        return tableData.filter((element, index) => {
             if(index >= this.GetStartIndex(pageNum, numOfRows) && index < this.GetEndIndex(pageNum, numOfRows)){
                 return element
             }
-        }))
+        })
     }
 }
 

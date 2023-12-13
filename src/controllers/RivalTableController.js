@@ -1,12 +1,15 @@
+import DataAccessorWrapper from "../wrappers/DataAccessorWrapper";
+
 export default class RivalTableController {
 
-    static findRival(tableModel){
+    static findRival(data, algoId){
         const nameFrequency = {};
         let mostFrequentName = "";
         let mostFrequentNum = 0;
+        
+        data.map((matchData) => {
+            let name = DataAccessorWrapper.OpponentUserNameFromMatch(matchData, algoId);
 
-        tableModel.GetData().map((element) => {
-            const name = element.name();
             if (nameFrequency[name]) {
                 nameFrequency[name]++;
             } else {
@@ -22,7 +25,7 @@ export default class RivalTableController {
         return [mostFrequentName, mostFrequentNum];
     }
 
-    static hasRival(tableModel) {
-        return RivalTableController.findRival(tableModel)[1] > 1;
+    static hasRival(data, algoId) {
+        return data.length > 0 && RivalTableController.findRival(data, algoId)[1] > 1;
     }
 }
