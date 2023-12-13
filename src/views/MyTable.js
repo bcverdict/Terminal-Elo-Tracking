@@ -4,6 +4,7 @@ import '../styles/MyTable.css'
 import TableDisplayData from "./TableDisplayData";
 import Pagination from "./Pagination";
 import tableController from "../controllers/TableController";
+import TableController from "../controllers/TableController";
 
 export default function MyTable(props) {
 
@@ -18,7 +19,11 @@ export default function MyTable(props) {
     return (
         <div style={props.style}>
             <h1 className='title'>{props.title}</h1>
-            <h3>{"Total: " + props.totalGames}</h3>
+            <div className='stats'>
+                <h3>{"Total: " + props.fullData.length}</h3>
+                <h3>{"Wins: " + TableController.NumOfWins(props.fullData, props.algoId)}</h3>
+                <h3>{"Losses: " + TableController.NumOfLosses(props.fullData, props.algoId)}</h3>
+            </div>
             <TableDisplayData data={displayData} changeId={props.changeId} algoId={props.algoId}/>
             <Pagination
                 data={props.fullData}

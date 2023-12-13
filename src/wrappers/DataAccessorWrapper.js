@@ -67,6 +67,10 @@ export default class DataAccessorWrapper {
         return matchData.winning_algo.id == algoId
     }
 
+    static DidLoseMatch(matchData, algoId){
+        return matchData.losing_algo.id == algoId
+    }
+
     static MatchResult(matchData, algoId) {
         return this.DidWinMatch(matchData, algoId) ? 'W' : 'L'
     }

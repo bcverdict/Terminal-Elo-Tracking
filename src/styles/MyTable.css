@@ -55,3 +55,9 @@ text-decoration: underline;
   font-weight: bold;
   margin: 12px 0;
 }
+
+.stats {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+}

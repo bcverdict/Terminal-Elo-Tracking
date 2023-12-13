@@ -96,7 +96,6 @@ export default function Body() {
                                     fullData = {rivalData}
                                     style = {toCenter}
                                     changeId = {changeId}
-                                    totalGames = {rivalData.length}
                                     algoId = {algoId}
                                 />
                             }
@@ -105,7 +104,6 @@ export default function Body() {
                                 fullData = {matchData}
                                 style = {toCenter}
                                 changeId = {changeId}
-                                totalGames = {matchData.length}
                                 algoId = {algoId}
                             />
                         </div>

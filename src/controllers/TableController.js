@@ -9,6 +9,28 @@ class TableController {
         return (pageNum+1)*numOfRows
     }
 
+    static NumOfLosses(data, algoId){
+        let totalLosses = 0;
+        data.map((element) => {
+            if(DataAccessorWrapper.DidLoseMatch(element, algoId)){
+                totalLosses += 1;
+            }
+        })
+
+        return totalLosses;
+    }
+
+    static NumOfWins(data, algoId){
+        let totalWins = 0;
+        data.map((element) => {
+            if(DataAccessorWrapper.DidWinMatch(element, algoId)){
+                totalWins += 1;
+            }
+        })
+
+        return totalWins;
+    }
+
     static FilterByOpponentUserName(data, name) {
         return data.filter((element) => {
             return DataAccessorWrapper.OpponentUserNameFromMatch(element) === name
