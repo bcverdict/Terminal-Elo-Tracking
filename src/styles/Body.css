@@ -29,3 +29,8 @@
     margin: 5px !important;
     padding-right: 5px;
 }
+.chartContainer {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+}

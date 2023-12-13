@@ -5,12 +5,12 @@ import MyTable from './MyTable';
 import {ThemeContext} from "./ThemeContext";
 import TerminalApiWrapper from "../wrappers/TerminalApiWrapper";
 import TableController from "../controllers/TableController";
-import SearchIcon from '@mui/icons-material/Search';
 import CircularProgress from "@mui/material/CircularProgress";
 import RivalTableController from "../controllers/RivalTableController";
 import DarkModeButton from "./DarkModeButton";
 import EloChart from "./EloChart";
 import DataAccessorWrapper from "../wrappers/DataAccessorWrapper";
+import SearchBar from "./SearchBar";
 
 
 export default function Body() {
@@ -82,14 +82,13 @@ export default function Body() {
         <div style={bodyStyle}>
             <div style={toCenter}>
                 <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode}/>
-                <form className="inputButtonPair" onSubmit={handleSubmit}>
-                    <Input className="input" value={inputValue === 0 ? '' : inputValue } onChange={(e)=>{setInputValue(e.target.value)}}/>
-                    <Button className="button" color="primary" type="submit"><SearchIcon/></Button>
-                </form>
+                <SearchBar submitHandler={handleSubmit} setInputValue={setInputValue} inputValue={inputValue}></SearchBar>
                 { DataAccessorWrapper.DataIsInvalid(matchData) ? "" :
                     isLoading ? <CircularProgress />:
                         <div style={toCenter}>
-                            <EloChart data={matchData} darkMode={darkMode} algoId={algoId}/>
+                            <div className='chartContainer'>
+                                <EloChart data={matchData} darkMode={darkMode} algoId={algoId}/>
+                            </div>
                             {!RivalTableController.hasRival(matchData, algoId) ? "" :
                                 <MyTable
                                     title = {"Rival: " + rivalName}
