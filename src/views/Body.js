@@ -44,9 +44,9 @@ export default function Body() {
         return data
     }
     const createRivalData = (matchData) => {
-        if(DataAccessorWrapper.DataIsValid(matchData) && RivalTableController.hasRival(matchData, algoId)){
+        if(DataAccessorWrapper.DataIsValid(matchData)){
             let rivalDetails = RivalTableController.findRival(matchData, algoId)
-            let rivalTableData = TableController.FilterByOpponentUserName(matchData, rivalDetails[0])
+            let rivalTableData = TableController.FilterByOpponentUserName(matchData, rivalDetails[0], algoId)
 
             setRivalName(rivalDetails[0])
             return rivalTableData
@@ -89,7 +89,6 @@ export default function Body() {
                             <div className='chartContainer'>
                                 <EloChart data={matchData} darkMode={darkMode} algoId={algoId}/>
                             </div>
-                            {!RivalTableController.hasRival(matchData, algoId) ? "" :
                                 <MyTable
                                     title = {"Rival: " + rivalName}
                                     fullData = {rivalData}
@@ -97,7 +96,6 @@ export default function Body() {
                                     changeId = {changeId}
                                     algoId = {algoId}
                                 />
-                            }
                             <MyTable
                                 title={"All Games"}
                                 fullData = {matchData}

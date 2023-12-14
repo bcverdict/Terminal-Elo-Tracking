@@ -31,9 +31,9 @@ class TableController {
         return totalWins;
     }
 
-    static FilterByOpponentUserName(data, name) {
+    static FilterByOpponentUserName(data, name, algoId) {
         return data.filter((element) => {
-            return DataAccessorWrapper.OpponentUserNameFromMatch(element) === name
+            return DataAccessorWrapper.OpponentUserNameFromMatch(element, algoId) === name
         });
     }
 

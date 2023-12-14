@@ -6,7 +6,7 @@ export default class RivalTableController {
         const nameFrequency = {};
         let mostFrequentName = "";
         let mostFrequentNum = 0;
-        
+
         data.map((matchData) => {
             let name = DataAccessorWrapper.OpponentUserNameFromMatch(matchData, algoId);
 

@@ -59,19 +59,19 @@ export default class DataAccessorWrapper {
     static DataIsValid(data){
         return !this.DataIsInvalid(data)
     }
-    static DataIsInvalid(data){
+    static DataIsInvalid(data) : boolean {
         return !Array.isArray(data) || data.length == 0;
     }
 
-    static DidWinMatch(matchData, algoId){
+    static DidWinMatch(matchData, algoId) : boolean {
         return matchData.winning_algo.id == algoId
     }
 
-    static DidLoseMatch(matchData, algoId){
+    static DidLoseMatch(matchData, algoId) : boolean {
         return matchData.losing_algo.id == algoId
     }
 
-    static MatchResult(matchData, algoId) {
+    static MatchResult(matchData, algoId) : string {
         return this.DidWinMatch(matchData, algoId) ? 'W' : 'L'
     }
 
@@ -94,6 +94,7 @@ export default class DataAccessorWrapper {
     }
 
     static OpponentUserNameFromMatch(matchData, algoId){
+        //console.log("match data: ", matchData)
         if(this.DidWinMatch(matchData, algoId)){
             if(matchData.losing_user == undefined){
                 return matchData.losing_algo.user
@@ -102,10 +103,15 @@ export default class DataAccessorWrapper {
             return matchData.losing_user.displayName
         }
 
-        if(matchData.winning_user == undefined){
-            return matchData.winning_algo.user
+        if(this.DidLoseMatch(matchData, algoId)){
+            if(matchData.winning_user == undefined){
+                return matchData.winning_algo.user
+            }
+
+            return matchData.winning_user.displayName
         }
-        return matchData.winning_user.displayName
+
+        return "not found"
     }
 
     static GameLinkFromMatchData(matchData){
