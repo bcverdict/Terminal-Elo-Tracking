@@ -82,7 +82,7 @@ export default function Body() {
         <div style={bodyStyle}>
             <div style={toCenter}>
                 <DarkModeButton darkMode={darkMode} setDarkMode={setDarkMode}/>
-                <SearchBar submitHandler={handleSubmit} setInputValue={setInputValue} inputValue={inputValue}></SearchBar>
+                <SearchBar submitHandler={handleSubmit} setInputValue={setInputValue} inputValue={inputValue} placeholder={"algo id"}></SearchBar>
                 { DataAccessorWrapper.DataIsInvalid(matchData) ? "" :
                     isLoading ? <CircularProgress />:
                         <div style={toCenter}>

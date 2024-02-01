@@ -5,7 +5,7 @@ export default function SearchBar(props) {
 
     return(
         <form className="inputButtonPair" onSubmit={props.submitHandler}>
-            <Input className="input" value={props.inputValue === 0 ? '' : props.inputValue } onChange={(e)=>{props.setInputValue(e.target.value)}}/>
+            <Input className="input" placeholder={props.placeholder} value={props.inputValue === 0 ? '' : props.inputValue } onChange={(e)=>{props.setInputValue(e.target.value)}}/>
             <Button className="button" color="primary" type="submit"><SearchIcon/></Button>
         </form>
     );
